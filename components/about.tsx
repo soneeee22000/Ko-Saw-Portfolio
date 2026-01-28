@@ -33,9 +33,22 @@ export function About() {
 
   return (
     <section id="about" className="py-24 bg-secondary/30 relative overflow-hidden">
-      {/* Background decorative elements */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
-      <div className="absolute bottom-0 left-0 w-80 h-80 bg-secondary/30 rounded-full blur-[80px] translate-y-1/2 -translate-x-1/2" />
+      {/* Supernova/Sun Background - Corner Emitting Gradients */}
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-bl from-orange-400/40 via-orange-500/20 to-transparent rounded-full -translate-y-1/3 translate-x-1/3 animate-corner-emit motion-reduce:animate-none motion-reduce:opacity-30" />
+      <div className="absolute bottom-0 left-0 w-[550px] h-[550px] bg-gradient-to-tr from-amber-500/35 via-orange-400/15 to-transparent rounded-full translate-y-1/3 -translate-x-1/3 animate-corner-emit motion-reduce:animate-none motion-reduce:opacity-25" style={{ animationDelay: '2s' }} />
+      <div className="absolute top-1/4 left-0 w-[500px] h-[500px] bg-gradient-to-r from-orange-300/30 to-transparent rounded-full -translate-x-1/2 animate-shimmer-rotate motion-reduce:animate-none motion-reduce:opacity-20" style={{ animationDelay: '5s' }} />
+      <div className="absolute bottom-1/4 right-0 w-[480px] h-[480px] bg-gradient-to-l from-amber-400/30 to-transparent rounded-full translate-x-1/2 animate-shimmer-rotate motion-reduce:animate-none motion-reduce:opacity-20" style={{ animationDelay: '10s' }} />
+      
+      {/* Active Orange Glow Spots - Splattering Across Section */}
+      <div className="absolute top-[15%] right-[20%] w-64 h-64 bg-orange-500/40 rounded-full animate-orbital-1 animate-pulse-glow-bold motion-reduce:animate-none motion-reduce:opacity-25" />
+      <div className="absolute top-[60%] left-[15%] w-72 h-72 bg-amber-500/35 rounded-full animate-orbital-2 animate-pulse-glow-medium motion-reduce:animate-none motion-reduce:opacity-20" style={{ animationDelay: '1s' }} />
+      <div className="absolute top-[40%] right-[35%] w-56 h-56 bg-orange-400/45 rounded-full animate-orbital-3 animate-pulse-glow-bold motion-reduce:animate-none motion-reduce:opacity-30" style={{ animationDelay: '3s' }} />
+      <div className="absolute bottom-[25%] right-[10%] w-80 h-80 bg-orange-600/30 rounded-full animate-orbital-1 animate-pulse-glow-soft motion-reduce:animate-none motion-reduce:opacity-20" style={{ animationDelay: '4s' }} />
+      <div className="absolute top-[30%] left-[25%] w-60 h-60 bg-amber-400/40 rounded-full animate-orbital-2 animate-pulse-glow-medium motion-reduce:animate-none motion-reduce:opacity-25" style={{ animationDelay: '2.5s' }} />
+      <div className="absolute bottom-[45%] left-[40%] w-48 h-48 bg-orange-300/50 rounded-full animate-orbital-3 animate-pulse-glow-bold motion-reduce:animate-none motion-reduce:opacity-30" style={{ animationDelay: '5.5s' }} />
+      <div className="absolute top-[50%] right-[45%] w-52 h-52 bg-amber-600/35 rounded-full animate-orbital-1 animate-pulse-glow-soft motion-reduce:animate-none motion-reduce:opacity-20" style={{ animationDelay: '6s' }} />
+      <div className="absolute bottom-[35%] left-[30%] w-68 h-68 bg-orange-500/38 rounded-full animate-orbital-2 animate-pulse-glow-medium motion-reduce:animate-none motion-reduce:opacity-25" style={{ animationDelay: '7s' }} />
+      <div className="absolute top-[20%] left-[45%] w-44 h-44 bg-orange-400/42 rounded-full animate-orbital-3 animate-pulse-glow-bold motion-reduce:animate-none motion-reduce:opacity-28" style={{ animationDelay: '8s' }} />
 
       <div ref={sectionRef} className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         {/* Section header */}
