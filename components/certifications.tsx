@@ -1,6 +1,7 @@
 "use client"
 
-import { Award, ExternalLink, Calendar, CheckCircle, AlertCircle } from "lucide-react"
+import { Award, Calendar, CheckCircle, AlertCircle } from "lucide-react"
+import { useScrollAnimation } from "@/hooks/use-scroll-animation"
 
 const certifications = [
   {
@@ -62,116 +63,182 @@ const certifications = [
   },
 ]
 
+function FeaturedCertCard({ 
+  cert, 
+  index, 
+  isVisible 
+}: { 
+  cert: typeof certifications[0]
+  index: number
+  isVisible: boolean 
+}) {
+  return (
+    <div
+      className={`group relative p-6 bg-card rounded-lg border border-border hover:border-primary/50 transition-all duration-500 hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/5 overflow-hidden ${
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+      }`}
+      style={{ transitionDelay: `${200 + index * 100}ms` }}
+    >
+      {/* Animated background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      
+      {/* Shimmer effect */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+      </div>
+
+      {/* Status badge */}
+      <div className="absolute top-4 right-4">
+        {cert.status === "active" ? (
+          <span className="inline-flex items-center gap-1 px-2 py-1 text-xs font-medium bg-green-500/10 text-green-400 rounded-full group-hover:bg-green-500/20 transition-colors duration-300">
+            <CheckCircle className="w-3 h-3 animate-pulse" />
+            Active
+          </span>
+        ) : (
+          <span className="inline-flex items-center gap-1 px-2 py-1 text-xs font-medium bg-yellow-500/10 text-yellow-400 rounded-full group-hover:bg-yellow-500/20 transition-colors duration-300">
+            <AlertCircle className="w-3 h-3" />
+            Renewal
+          </span>
+        )}
+      </div>
+
+      {/* Icon with animation */}
+      <div className="relative w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-primary/20 group-hover:scale-110 transition-all duration-300">
+        <Award className="w-6 h-6 text-primary group-hover:rotate-12 transition-transform duration-500" />
+        <div className="absolute inset-0 bg-primary/20 rounded-lg blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      </div>
+
+      {/* Content */}
+      <h3 className="text-xl font-semibold text-foreground mb-1 pr-20 group-hover:text-primary transition-colors duration-300">
+        {cert.title}
+      </h3>
+      <p className="text-primary text-sm mb-2">{cert.issuer}</p>
+
+      <p className="text-muted-foreground text-sm mb-4 leading-relaxed relative">
+        {cert.description}
+      </p>
+
+      {/* Details */}
+      <div className="flex flex-wrap gap-4 text-sm text-muted-foreground mb-4 relative">
+        <div className="flex items-center gap-1 group/item cursor-default">
+          <Calendar className="w-4 h-4 group-hover/item:scale-110 transition-transform duration-300" />
+          <span className="group-hover/item:text-foreground transition-colors duration-300">Issued: {cert.issueDate}</span>
+        </div>
+        {cert.expiryDate && (
+          <div className="flex items-center gap-1 group/item cursor-default">
+            <Calendar className="w-4 h-4 group-hover/item:scale-110 transition-transform duration-300" />
+            <span className="group-hover/item:text-foreground transition-colors duration-300">Expires: {cert.expiryDate}</span>
+          </div>
+        )}
+      </div>
+
+      {/* Skills with staggered animation */}
+      <div className="flex flex-wrap gap-2 pt-4 border-t border-border/50 relative">
+        {cert.skills.map((skill, skillIndex) => (
+          <span
+            key={skill}
+            className={`px-2 py-1 text-xs font-mono text-muted-foreground bg-secondary rounded hover:bg-primary/10 hover:text-primary transition-all duration-300 cursor-default hover:scale-105 ${
+              isVisible ? "opacity-100 scale-100" : "opacity-0 scale-90"
+            }`}
+            style={{ transitionDelay: `${400 + index * 100 + skillIndex * 50}ms` }}
+          >
+            {skill}
+          </span>
+        ))}
+      </div>
+
+      {/* Credential ID */}
+      {cert.credentialId && (
+        <p className="mt-4 text-xs text-muted-foreground font-mono relative">
+          Credential ID: {cert.credentialId}
+        </p>
+      )}
+      
+      {/* Animated bottom border */}
+      <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-gradient-to-r from-primary to-primary/50 group-hover:w-full transition-all duration-700" />
+    </div>
+  )
+}
+
+function SmallCertCard({ 
+  cert, 
+  index, 
+  isVisible 
+}: { 
+  cert: typeof certifications[0]
+  index: number
+  isVisible: boolean 
+}) {
+  return (
+    <div
+      className={`group p-4 bg-card rounded-lg border border-border hover:border-primary/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/5 ${
+        isVisible ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-4 scale-95"
+      }`}
+      style={{ transitionDelay: `${400 + index * 80}ms` }}
+    >
+      <div className="flex items-start justify-between mb-2">
+        <Award className="w-5 h-5 text-primary flex-shrink-0 group-hover:scale-125 group-hover:rotate-12 transition-all duration-300" />
+        {cert.status === "active" ? (
+          <CheckCircle className="w-4 h-4 text-green-400 group-hover:scale-110 transition-transform duration-300" />
+        ) : (
+          <AlertCircle className="w-4 h-4 text-yellow-400 group-hover:scale-110 transition-transform duration-300" />
+        )}
+      </div>
+      <h4 className="font-semibold text-foreground text-sm mb-1 group-hover:text-primary transition-colors duration-300">
+        {cert.title}
+      </h4>
+      <p className="text-xs text-primary mb-2">{cert.issuer}</p>
+      <p className="text-xs text-muted-foreground">{cert.issueDate}</p>
+    </div>
+  )
+}
+
 export function Certifications() {
+  const { ref: sectionRef, isVisible } = useScrollAnimation({ threshold: 0.1 })
   const featuredCerts = certifications.filter((c) => c.featured)
   const otherCerts = certifications.filter((c) => !c.featured)
 
   return (
-    <section className="py-24 bg-background">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-24 bg-background relative overflow-hidden">
+      {/* Background decorations */}
+      <div className="absolute top-1/4 right-0 w-80 h-80 bg-primary/5 rounded-full blur-[100px]" />
+      <div className="absolute bottom-1/4 left-0 w-64 h-64 bg-secondary/20 rounded-full blur-[80px]" />
+
+      <div ref={sectionRef} className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         {/* Section header */}
-        <div className="flex items-center gap-4 mb-12">
+        <div 
+          className={`flex items-center gap-4 mb-12 transition-all duration-700 ease-out ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+          }`}
+        >
           <span className="text-primary font-mono text-sm">04.</span>
           <h2 className="text-2xl sm:text-3xl font-bold text-foreground">
             Certifications
           </h2>
-          <div className="flex-1 h-px bg-border/50" />
+          <div className="flex-1 h-px bg-gradient-to-r from-border/50 to-transparent" />
         </div>
 
         {/* Featured certifications */}
         <div className="grid md:grid-cols-2 gap-6 mb-8">
-          {featuredCerts.map((cert) => (
-            <div
-              key={cert.title}
-              className="relative p-6 bg-card rounded-lg border border-border hover:border-primary/30 transition-colors overflow-hidden"
-            >
-              {/* Status badge */}
-              <div className="absolute top-4 right-4">
-                {cert.status === "active" ? (
-                  <span className="inline-flex items-center gap-1 px-2 py-1 text-xs font-medium bg-green-500/10 text-green-400 rounded-full">
-                    <CheckCircle className="w-3 h-3" />
-                    Active
-                  </span>
-                ) : (
-                  <span className="inline-flex items-center gap-1 px-2 py-1 text-xs font-medium bg-yellow-500/10 text-yellow-400 rounded-full">
-                    <AlertCircle className="w-3 h-3" />
-                    Renewal
-                  </span>
-                )}
-              </div>
-
-              {/* Icon */}
-              <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
-                <Award className="w-6 h-6 text-primary" />
-              </div>
-
-              {/* Content */}
-              <h3 className="text-xl font-semibold text-foreground mb-1 pr-20">
-                {cert.title}
-              </h3>
-              <p className="text-primary text-sm mb-2">{cert.issuer}</p>
-
-              <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
-                {cert.description}
-              </p>
-
-              {/* Details */}
-              <div className="flex flex-wrap gap-4 text-sm text-muted-foreground mb-4">
-                <div className="flex items-center gap-1">
-                  <Calendar className="w-4 h-4" />
-                  <span>Issued: {cert.issueDate}</span>
-                </div>
-                {cert.expiryDate && (
-                  <div className="flex items-center gap-1">
-                    <Calendar className="w-4 h-4" />
-                    <span>Expires: {cert.expiryDate}</span>
-                  </div>
-                )}
-              </div>
-
-              {/* Skills */}
-              <div className="flex flex-wrap gap-2 pt-4 border-t border-border/50">
-                {cert.skills.map((skill) => (
-                  <span
-                    key={skill}
-                    className="px-2 py-1 text-xs font-mono text-muted-foreground bg-secondary rounded"
-                  >
-                    {skill}
-                  </span>
-                ))}
-              </div>
-
-              {/* Credential ID */}
-              {cert.credentialId && (
-                <p className="mt-4 text-xs text-muted-foreground font-mono">
-                  Credential ID: {cert.credentialId}
-                </p>
-              )}
-            </div>
+          {featuredCerts.map((cert, index) => (
+            <FeaturedCertCard 
+              key={cert.title} 
+              cert={cert} 
+              index={index}
+              isVisible={isVisible}
+            />
           ))}
         </div>
 
         {/* Other certifications */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {otherCerts.map((cert) => (
-            <div
-              key={cert.title}
-              className="p-4 bg-card rounded-lg border border-border hover:border-primary/30 transition-colors"
-            >
-              <div className="flex items-start justify-between mb-2">
-                <Award className="w-5 h-5 text-primary flex-shrink-0" />
-                {cert.status === "active" ? (
-                  <CheckCircle className="w-4 h-4 text-green-400" />
-                ) : (
-                  <AlertCircle className="w-4 h-4 text-yellow-400" />
-                )}
-              </div>
-              <h4 className="font-semibold text-foreground text-sm mb-1">
-                {cert.title}
-              </h4>
-              <p className="text-xs text-primary mb-2">{cert.issuer}</p>
-              <p className="text-xs text-muted-foreground">{cert.issueDate}</p>
-            </div>
+          {otherCerts.map((cert, index) => (
+            <SmallCertCard 
+              key={cert.title} 
+              cert={cert} 
+              index={index}
+              isVisible={isVisible}
+            />
           ))}
         </div>
       </div>
