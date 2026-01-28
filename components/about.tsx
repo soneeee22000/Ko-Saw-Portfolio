@@ -33,22 +33,12 @@ export function About() {
 
   return (
     <section id="about" className="py-24 bg-secondary/30 relative overflow-hidden">
-      {/* Supernova/Sun Background - Corner Emitting Gradients */}
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-bl from-orange-400/40 via-orange-500/20 to-transparent rounded-full -translate-y-1/3 translate-x-1/3 animate-corner-emit motion-reduce:animate-none motion-reduce:opacity-30" />
-      <div className="absolute bottom-0 left-0 w-[550px] h-[550px] bg-gradient-to-tr from-amber-500/35 via-orange-400/15 to-transparent rounded-full translate-y-1/3 -translate-x-1/3 animate-corner-emit motion-reduce:animate-none motion-reduce:opacity-25" style={{ animationDelay: '2s' }} />
-      <div className="absolute top-1/4 left-0 w-[500px] h-[500px] bg-gradient-to-r from-orange-300/30 to-transparent rounded-full -translate-x-1/2 animate-shimmer-rotate motion-reduce:animate-none motion-reduce:opacity-20" style={{ animationDelay: '5s' }} />
-      <div className="absolute bottom-1/4 right-0 w-[480px] h-[480px] bg-gradient-to-l from-amber-400/30 to-transparent rounded-full translate-x-1/2 animate-shimmer-rotate motion-reduce:animate-none motion-reduce:opacity-20" style={{ animationDelay: '10s' }} />
-      
-      {/* Active Orange Glow Spots - Splattering Across Section */}
-      <div className="absolute top-[15%] right-[20%] w-64 h-64 bg-orange-500/40 rounded-full animate-orbital-1 animate-pulse-glow-bold motion-reduce:animate-none motion-reduce:opacity-25" />
-      <div className="absolute top-[60%] left-[15%] w-72 h-72 bg-amber-500/35 rounded-full animate-orbital-2 animate-pulse-glow-medium motion-reduce:animate-none motion-reduce:opacity-20" style={{ animationDelay: '1s' }} />
-      <div className="absolute top-[40%] right-[35%] w-56 h-56 bg-orange-400/45 rounded-full animate-orbital-3 animate-pulse-glow-bold motion-reduce:animate-none motion-reduce:opacity-30" style={{ animationDelay: '3s' }} />
-      <div className="absolute bottom-[25%] right-[10%] w-80 h-80 bg-orange-600/30 rounded-full animate-orbital-1 animate-pulse-glow-soft motion-reduce:animate-none motion-reduce:opacity-20" style={{ animationDelay: '4s' }} />
-      <div className="absolute top-[30%] left-[25%] w-60 h-60 bg-amber-400/40 rounded-full animate-orbital-2 animate-pulse-glow-medium motion-reduce:animate-none motion-reduce:opacity-25" style={{ animationDelay: '2.5s' }} />
-      <div className="absolute bottom-[45%] left-[40%] w-48 h-48 bg-orange-300/50 rounded-full animate-orbital-3 animate-pulse-glow-bold motion-reduce:animate-none motion-reduce:opacity-30" style={{ animationDelay: '5.5s' }} />
-      <div className="absolute top-[50%] right-[45%] w-52 h-52 bg-amber-600/35 rounded-full animate-orbital-1 animate-pulse-glow-soft motion-reduce:animate-none motion-reduce:opacity-20" style={{ animationDelay: '6s' }} />
-      <div className="absolute bottom-[35%] left-[30%] w-68 h-68 bg-orange-500/38 rounded-full animate-orbital-2 animate-pulse-glow-medium motion-reduce:animate-none motion-reduce:opacity-25" style={{ animationDelay: '7s' }} />
-      <div className="absolute top-[20%] left-[45%] w-44 h-44 bg-orange-400/42 rounded-full animate-orbital-3 animate-pulse-glow-bold motion-reduce:animate-none motion-reduce:opacity-28" style={{ animationDelay: '8s' }} />
+      {/* Subtle warm background spots */}
+      <div className="absolute top-[-10%] right-[5%] w-[420px] h-[420px] bg-amber-400/18 rounded-full blur-[140px] animate-soft-drift-1 motion-reduce:animate-none motion-reduce:opacity-22" />
+      <div className="absolute top-[20%] left-[10%] w-[360px] h-[360px] bg-amber-400/14 rounded-full blur-[130px] animate-soft-drift-2 motion-reduce:animate-none motion-reduce:opacity-20" style={{ animationDelay: "4s" }} />
+      <div className="absolute top-[55%] right-[18%] w-[320px] h-[320px] bg-amber-300/14 rounded-full blur-[120px] animate-soft-drift-3 motion-reduce:animate-none motion-reduce:opacity-20" style={{ animationDelay: "9s" }} />
+      <div className="absolute bottom-[10%] left-[20%] w-[380px] h-[380px] bg-amber-500/16 rounded-full blur-[150px] animate-soft-drift-1 motion-reduce:animate-none motion-reduce:opacity-20" style={{ animationDelay: "12s" }} />
+      <div className="absolute bottom-[35%] right-[45%] w-[260px] h-[260px] bg-amber-400/12 rounded-full blur-[110px] animate-soft-drift-2 motion-reduce:animate-none motion-reduce:opacity-18" style={{ animationDelay: "6s" }} />
 
       <div ref={sectionRef} className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         {/* Section header */}
@@ -107,7 +97,7 @@ export function About() {
           {/* Content */}
           <div className="lg:col-span-3 space-y-6">
             <p 
-              className={`text-foreground text-lg leading-relaxed transition-all duration-700 delay-200 ease-out ${
+              className={`text-foreground/90 text-lg leading-relaxed drop-shadow-[0_1px_12px_rgba(0,0,0,0.35)] transition-all duration-700 delay-200 ease-out ${
                 sectionVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
               }`}
             >
@@ -118,7 +108,7 @@ export function About() {
             </p>
             
             <p 
-              className={`text-muted-foreground leading-relaxed transition-all duration-700 delay-300 ease-out ${
+              className={`text-foreground/80 leading-relaxed drop-shadow-[0_1px_12px_rgba(0,0,0,0.35)] transition-all duration-700 delay-300 ease-out ${
                 sectionVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
               }`}
             >
@@ -129,7 +119,7 @@ export function About() {
             </p>
 
             <p 
-              className={`text-muted-foreground leading-relaxed transition-all duration-700 delay-[400ms] ease-out ${
+              className={`text-foreground/80 leading-relaxed drop-shadow-[0_1px_12px_rgba(0,0,0,0.35)] transition-all duration-700 delay-[400ms] ease-out ${
                 sectionVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
               }`}
             >
@@ -141,17 +131,17 @@ export function About() {
 
             {/* Personal details with icons */}
             <div 
-              className={`flex flex-wrap gap-6 pt-4 text-sm transition-all duration-700 delay-500 ease-out ${
+              className={`flex flex-wrap gap-6 pt-4 text-sm text-foreground/75 drop-shadow-[0_1px_10px_rgba(0,0,0,0.35)] transition-all duration-700 delay-500 ease-out ${
                 sectionVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
               }`}
             >
-              <div className="flex items-center gap-2 text-muted-foreground group cursor-default">
+              <div className="flex items-center gap-2 group cursor-default">
                 <MapPin className="w-4 h-4 text-primary transition-transform duration-300 group-hover:scale-125" />
-                <span className="group-hover:text-foreground transition-colors duration-300">Yangon, Myanmar</span>
+                <span className="group-hover:text-foreground/95 transition-colors duration-300">Yangon, Myanmar</span>
               </div>
-              <div className="flex items-center gap-2 text-muted-foreground group cursor-default">
+              <div className="flex items-center gap-2 group cursor-default">
                 <Globe className="w-4 h-4 text-primary transition-transform duration-300 group-hover:scale-125 group-hover:rotate-12" />
-                <span className="group-hover:text-foreground transition-colors duration-300">English, Myanmar, Japanese (Basic)</span>
+                <span className="group-hover:text-foreground/95 transition-colors duration-300">English, Myanmar, Japanese (Basic)</span>
               </div>
             </div>
           </div>

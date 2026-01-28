@@ -19,16 +19,17 @@ const stats = [
 ]
 
 // Floating particle component
-function FloatingParticle({ delay, duration, size, left, top }: {
+function FloatingParticle({ delay, duration, size, left, top, className = "" }: {
   delay: number
   duration: number
   size: number
   left: string
   top: string
+  className?: string
 }) {
   return (
     <div
-      className="absolute rounded-full bg-primary/20 animate-float"
+      className={`absolute rounded-full ${className}`}
       style={{
         width: size,
         height: size,
@@ -129,38 +130,59 @@ export function Hero() {
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
       {/* Animated gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-secondary/30 animate-gradient" />
+      <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-amber-200/30 animate-gradient" />
+
+      {/* Warm corner emitters */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute -top-24 -left-24 h-[420px] w-[420px] rounded-full bg-[radial-gradient(circle,_rgba(251,191,36,0.45),_rgba(251,191,36,0.12)_45%,_transparent_70%)] blur-[60px] animate-corner-emit" />
+        <div className="absolute -bottom-24 -right-24 h-[480px] w-[480px] rounded-full bg-[radial-gradient(circle,_rgba(249,115,22,0.4),_rgba(249,115,22,0.12)_45%,_transparent_70%)] blur-[70px] animate-corner-emit" />
+        <div className="absolute -top-16 right-12 h-[360px] w-[360px] rounded-full bg-[radial-gradient(circle,_rgba(252,211,77,0.35),_rgba(252,211,77,0.12)_45%,_transparent_70%)] blur-[60px] animate-pulse-glow-medium" />
+      </div>
       
       {/* Moving gradient orbs */}
       <div 
-        className="absolute w-[600px] h-[600px] rounded-full bg-primary/5 blur-[120px] -top-48 -left-48 transition-transform duration-[2s] ease-out"
+        className="absolute w-[620px] h-[620px] rounded-full bg-amber-400/15 blur-[140px] -top-48 -left-48 transition-transform duration-[2s] ease-out animate-sun-drift-1"
         style={{
           transform: `translate(${mousePosition.x * 30}px, ${mousePosition.y * 30}px)`,
         }}
       />
       <div 
-        className="absolute w-[500px] h-[500px] rounded-full bg-primary/8 blur-[100px] -bottom-32 -right-32 transition-transform duration-[2s] ease-out"
+        className="absolute w-[560px] h-[560px] rounded-full bg-orange-400/15 blur-[130px] -bottom-36 -right-32 transition-transform duration-[2s] ease-out animate-sun-drift-2"
         style={{
           transform: `translate(${mousePosition.x * -20}px, ${mousePosition.y * -20}px)`,
         }}
       />
       <div 
-        className="absolute w-[300px] h-[300px] rounded-full bg-secondary/20 blur-[80px] top-1/3 right-1/4 transition-transform duration-[1.5s] ease-out"
+        className="absolute w-[360px] h-[360px] rounded-full bg-amber-300/20 blur-[100px] top-1/3 right-1/4 transition-transform duration-[1.5s] ease-out animate-sun-drift-3"
         style={{
           transform: `translate(${mousePosition.x * 40}px, ${mousePosition.y * 40}px)`,
+        }}
+      />
+      <div 
+        className="absolute w-[280px] h-[280px] rounded-full bg-orange-300/20 blur-[90px] bottom-1/4 left-1/4 transition-transform duration-[1.5s] ease-out animate-sun-drift-2"
+        style={{
+          transform: `translate(${mousePosition.x * -35}px, ${mousePosition.y * 25}px)`,
         }}
       />
       
       {/* Floating particles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <FloatingParticle delay={0} duration={8} size={6} left="10%" top="20%" />
-        <FloatingParticle delay={1} duration={10} size={4} left="20%" top="60%" />
-        <FloatingParticle delay={2} duration={7} size={8} left="80%" top="30%" />
-        <FloatingParticle delay={0.5} duration={9} size={5} left="70%" top="70%" />
-        <FloatingParticle delay={1.5} duration={11} size={6} left="40%" top="15%" />
-        <FloatingParticle delay={3} duration={8} size={4} left="90%" top="80%" />
-        <FloatingParticle delay={2.5} duration={10} size={7} left="15%" top="85%" />
-        <FloatingParticle delay={1} duration={9} size={5} left="60%" top="45%" />
+        <FloatingParticle delay={0} duration={7} size={10} left="8%" top="18%" className="bg-amber-400/30 animate-splatter-drift-1" />
+        <FloatingParticle delay={1} duration={9} size={6} left="18%" top="62%" className="bg-orange-400/25 animate-splatter-drift-2" />
+        <FloatingParticle delay={2} duration={8} size={12} left="82%" top="28%" className="bg-amber-300/30 animate-splatter-drift-3" />
+        <FloatingParticle delay={0.5} duration={10} size={7} left="70%" top="72%" className="bg-orange-300/25 animate-splatter-drift-1" />
+        <FloatingParticle delay={1.5} duration={11} size={9} left="42%" top="14%" className="bg-amber-200/30 animate-splatter-drift-2" />
+        <FloatingParticle delay={3} duration={8} size={6} left="90%" top="80%" className="bg-orange-400/25 animate-splatter-drift-3" />
+        <FloatingParticle delay={2.5} duration={10} size={11} left="12%" top="86%" className="bg-amber-400/25 animate-splatter-drift-1" />
+        <FloatingParticle delay={1} duration={9} size={7} left="60%" top="45%" className="bg-orange-300/25 animate-splatter-drift-2" />
+        <FloatingParticle delay={2.2} duration={12} size={8} left="30%" top="35%" className="bg-amber-300/25 animate-splatter-drift-3" />
+        <FloatingParticle delay={0.8} duration={8} size={5} left="55%" top="25%" className="bg-orange-400/30 animate-splatter-drift-1" />
+        <FloatingParticle delay={3.4} duration={11} size={9} left="75%" top="50%" className="bg-amber-400/30 animate-splatter-drift-2" />
+        <FloatingParticle delay={1.8} duration={9} size={6} left="85%" top="15%" className="bg-orange-300/25 animate-splatter-drift-3" />
+        <FloatingParticle delay={2.7} duration={10} size={7} left="25%" top="75%" className="bg-amber-300/25 animate-splatter-drift-1" />
+        <FloatingParticle delay={0.3} duration={8} size={6} left="48%" top="65%" className="bg-orange-400/25 animate-splatter-drift-2" />
+        <FloatingParticle delay={2.9} duration={12} size={8} left="65%" top="82%" className="bg-amber-200/25 animate-splatter-drift-3" />
+        <FloatingParticle delay={1.2} duration={9} size={5} left="38%" top="55%" className="bg-orange-300/25 animate-splatter-drift-1" />
       </div>
 
       {/* Enhanced grid pattern with animation */}
@@ -177,7 +199,7 @@ export function Hero() {
       />
 
       {/* Radial glow behind content */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary/5 via-transparent to-transparent" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-amber-200/25 via-transparent to-transparent" />
 
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="space-y-8">

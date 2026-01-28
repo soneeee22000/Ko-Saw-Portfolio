@@ -160,6 +160,40 @@
     50% { opacity: 0.35; filter: blur(160px); }
   }
 
+  @keyframes sun-drift-1 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    30% { transform: translate(40px, -20px) scale(1.08); }
+    60% { transform: translate(-30px, 30px) scale(0.98); }
+  }
+
+  @keyframes sun-drift-2 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    25% { transform: translate(-35px, 25px) scale(1.1); }
+    55% { transform: translate(30px, -35px) scale(0.96); }
+  }
+
+  @keyframes sun-drift-3 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    20% { transform: translate(28px, 30px) scale(1.06); }
+    50% { transform: translate(-24px, -28px) scale(0.97); }
+    80% { transform: translate(18px, -10px) scale(1.03); }
+  }
+
+  @keyframes splatter-drift-1 {
+    0%, 100% { transform: translate(0, 0); opacity: 0.35; }
+    50% { transform: translate(24px, -18px); opacity: 0.6; }
+  }
+
+  @keyframes splatter-drift-2 {
+    0%, 100% { transform: translate(0, 0); opacity: 0.3; }
+    50% { transform: translate(-20px, 22px); opacity: 0.55; }
+  }
+
+  @keyframes splatter-drift-3 {
+    0%, 100% { transform: translate(0, 0); opacity: 0.28; }
+    50% { transform: translate(16px, 26px); opacity: 0.5; }
+  }
+
   @keyframes corner-emit {
     0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.4; }
     50% { transform: scale(1.3) rotate(10deg); opacity: 0.7; }
@@ -169,6 +203,22 @@
     0% { transform: rotate(0deg) scale(1); }
     50% { transform: rotate(180deg) scale(1.2); }
     100% { transform: rotate(360deg) scale(1); }
+  }
+
+  /* Subtle warm drift for About background */
+  @keyframes soft-drift-1 {
+    0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.12; }
+    50% { transform: translate(18px, -14px) scale(1.05); opacity: 0.18; }
+  }
+
+  @keyframes soft-drift-2 {
+    0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.1; }
+    50% { transform: translate(-16px, 12px) scale(1.04); opacity: 0.16; }
+  }
+
+  @keyframes soft-drift-3 {
+    0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.1; }
+    50% { transform: translate(14px, 18px) scale(1.03); opacity: 0.15; }
   }
 
   /* Animation utility classes */
@@ -196,12 +246,48 @@
     animation: pulse-glow-soft 6s ease-in-out infinite;
   }
 
+  .animate-sun-drift-1 {
+    animation: sun-drift-1 18s ease-in-out infinite;
+  }
+
+  .animate-sun-drift-2 {
+    animation: sun-drift-2 20s ease-in-out infinite;
+  }
+
+  .animate-sun-drift-3 {
+    animation: sun-drift-3 22s ease-in-out infinite;
+  }
+
+  .animate-splatter-drift-1 {
+    animation: splatter-drift-1 14s ease-in-out infinite;
+  }
+
+  .animate-splatter-drift-2 {
+    animation: splatter-drift-2 16s ease-in-out infinite;
+  }
+
+  .animate-splatter-drift-3 {
+    animation: splatter-drift-3 18s ease-in-out infinite;
+  }
+
   .animate-corner-emit {
     animation: corner-emit 8s ease-in-out infinite;
   }
 
   .animate-shimmer-rotate {
     animation: shimmer-rotate 40s linear infinite;
+  }
+
+  .animate-soft-drift-1 {
+    animation: soft-drift-1 36s ease-in-out infinite;
+  }
+
+  .animate-soft-drift-2 {
+    animation: soft-drift-2 42s ease-in-out infinite;
+  }
+
+  .animate-soft-drift-3 {
+    animation: soft-drift-3 48s ease-in-out infinite;
   }
 
   /* Reduced motion variants - static fallbacks */
@@ -212,8 +298,17 @@
     .animate-pulse-glow-bold,
     .animate-pulse-glow-medium,
     .animate-pulse-glow-soft,
+    .animate-sun-drift-1,
+    .animate-sun-drift-2,
+    .animate-sun-drift-3,
+    .animate-splatter-drift-1,
+    .animate-splatter-drift-2,
+    .animate-splatter-drift-3,
     .animate-corner-emit,
-    .animate-shimmer-rotate {
+    .animate-shimmer-rotate,
+    .animate-soft-drift-1,
+    .animate-soft-drift-2,
+    .animate-soft-drift-3 {
       animation: none;
     }
   }
