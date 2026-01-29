@@ -53,15 +53,52 @@ const subjects = [
 export function Contact() {
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [subject, setSubject] = useState("")
+  const [errorMessage, setErrorMessage] = useState("")
   const { ref: sectionRef, isVisible } = useScrollAnimation({ threshold: 0.1 })
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    const form = e.currentTarget
+    if (!subject) {
+      setErrorMessage("Please select a subject.")
+      return
+    }
+
     setIsSubmitting(true)
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1000))
-    setIsSubmitting(false)
-    setIsSubmitted(true)
+    setErrorMessage("")
+
+    const formData = new FormData(form)
+    const payload = {
+      name: String(formData.get("name") || "").trim(),
+      email: String(formData.get("email") || "").trim(),
+      company: String(formData.get("company") || "").trim(),
+      subject,
+      message: String(formData.get("message") || "").trim(),
+    }
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      })
+
+      if (!response.ok) {
+        const data = await response.json().catch(() => null)
+        setErrorMessage(data?.error || "Something went wrong. Please try again.")
+        return
+      }
+
+      setIsSubmitted(true)
+      form.reset()
+      setSubject("")
+    } catch (error) {
+      console.error("Contact form submission failed", error)
+      setErrorMessage("Unable to send message right now. Please try again.")
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -120,6 +157,9 @@ export function Contact() {
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
+                {errorMessage ? (
+                  <p className="text-sm text-red-500">{errorMessage}</p>
+                ) : null}
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div 
                     className={`space-y-2 transition-all duration-500 ${
@@ -130,6 +170,7 @@ export function Contact() {
                     <Label htmlFor="name">Name</Label>
                     <Input
                       id="name"
+                      name="name"
                       placeholder="Your name"
                       required
                       className="bg-card border-border focus:border-primary/50 focus:ring-primary/20 transition-all duration-300"
@@ -144,6 +185,7 @@ export function Contact() {
                     <Label htmlFor="email">Email</Label>
                     <Input
                       id="email"
+                      name="email"
                       type="email"
                       placeholder="your@email.com"
                       required
@@ -162,6 +204,7 @@ export function Contact() {
                     <Label htmlFor="company">Company (Optional)</Label>
                     <Input
                       id="company"
+                      name="company"
                       placeholder="Your company"
                       className="bg-card border-border focus:border-primary/50 focus:ring-primary/20 transition-all duration-300"
                     />
@@ -173,7 +216,7 @@ export function Contact() {
                     style={{ transitionDelay: '450ms' }}
                   >
                     <Label htmlFor="subject">Subject</Label>
-                    <Select required>
+                    <Select required value={subject} onValueChange={setSubject}>
                       <SelectTrigger className="bg-card border-border focus:border-primary/50 transition-all duration-300">
                         <SelectValue placeholder="Select a subject" />
                       </SelectTrigger>
@@ -197,6 +240,7 @@ export function Contact() {
                   <Label htmlFor="message">Message</Label>
                   <Textarea
                     id="message"
+                    name="message"
                     placeholder="Your message..."
                     rows={6}
                     required
